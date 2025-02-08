@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffe6e6;
+            color: #8b0000;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ff4d4d;
+        }
+        p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: #cc0052;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 1.4em;
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #ff1a4d;
+            transform: scale(1.1);
+        }
+        #proposal {
+            display: none;
+            font-size: 2em;
+            margin-top: 30px;
+            color: #d5006d;
+        }
+        #response {
+            font-size: 2em;
+            margin-top: 30px;
+        }
+        .no-response {
+            color: #ff1a1a;
+        }
+        .yes-response {
+            color: #ff4081;
+        }
+    </style>
+</head>
+<body>
+    <h1>Will You Be My Valentine? 💖</h1>
+    <p>Click the button below to see my proposal! 💕</p>
+    <button id="revealButton">Reveal Proposal 💌</button>
+    <div id="proposal">💍 I love you! Will you be my girlfriend? 💖</div>
+    <div id="response"></div>
+    <script>
+        document.getElementById('revealButton').addEventListener('click', function() {
+            document.getElementById('proposal').style.display = 'block';
+            this.style.display = 'none'; // Hide the reveal button
+            askQuestion();
+        });
+        
+        function askQuestion() {
+            const responseDiv = document.getElementById('response');
+            responseDiv.style.display = 'none';
+            responseDiv.textContent = '';
+            
+            const yesButton = document.createElement('button');
+            yesButton.textContent = 'YES 💕';
+            yesButton.id = 'yesButton';
+            
+            const noButton = document.createElement('button');
+            noButton.textContent = 'NO 💔';
+            noButton.id = 'noButton';
+            
+            document.body.appendChild(yesButton);
+            document.body.appendChild(noButton);
+            
+            yesButton.addEventListener('click', function() {
+                responseDiv.textContent = 'Then what is stopping us from kissing right now? 😘';
+                responseDiv.className = 'yes-response';
+                responseDiv.style.display = 'block';
+                yesButton.remove();
+                noButton.remove();
+            });
+            
+            noButton.addEventListener('click', function() {
+                responseDiv.textContent = 'Maybe you chose the wrong option, try again. 🥺';
+                responseDiv.className = 'no-response';
+                responseDiv.style.display = 'block';
+                yesButton.remove();
+                noButton.remove();
+                setTimeout(askQuestion, 1000); // Ask again after 1 second
+            });
+        }
+    </script>
+</body>
+</html>
